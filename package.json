@@ -27,6 +27,9 @@
   },
   "homepage": "https://github.com/NextThought/nti.web.session#readme",
   "dependencies": {
+    "nti-lib-dom": "^1.7.1",
+    "nti-web-client": "^1.2.0",
+    "nti-web-storage": "^1.0.0",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
