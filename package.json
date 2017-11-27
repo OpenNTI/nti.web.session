@@ -1,0 +1,38 @@
+{
+  "name": "nti-web-session",
+  "version": "1.0.0-alpha",
+  "author": "nextthought",
+  "license": "UNLICENSED",
+  "description": "Provides web analytic session interactions",
+  "keywords": [],
+  "main": "lib/index-cjs.js",
+  "module": "lib/index.js",
+  "scripts": {
+    "test": "nti-cmp-scripts test",
+    "start": "nti-cmp-scripts start",
+    "prepack": "nti-cmp-scripts build",
+    "build": "nti-cmp-scripts build",
+    "clean": "nti-cmp-scripts clean",
+    "check": "nti-cmp-scripts check",
+    "release": "nti-cmp-scripts release",
+    "install-snapshots": "nti-cmp-scripts install-snapshots",
+    "fix": "nti-cmp-scripts fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NextThought/nti.web.session.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NextThought/nti.web.session/issues"
+  },
+  "homepage": "https://github.com/NextThought/nti.web.session#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "devDependencies": {
+    "nti-cmp-scripts": "^1.0.71",
+    "nti-style-common": "^1.3.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1"
+  }
+}
