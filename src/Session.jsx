@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {Manager} from 'nti-analytics';
-import {getService} from 'nti-web-client';
+import {Manager} from 'nti-analytics';
+import {getService, getAppUser} from 'nti-web-client';
 import {LocalStorage} from 'nti-web-storage';
 import {VisibilityMonitor} from 'nti-lib-dom';
 
-class Manager {
-	beginSession () {}
-	endSession () {}
-}
 
 export default class Session extends React.Component {
 	static propTypes = {
@@ -17,13 +13,13 @@ export default class Session extends React.Component {
 	}
 
 	static childContextTypes = {
-		manager: PropTypes.object
+		analyticsManager: PropTypes.object
 	}
 
 	getChildContext () {
-		const {manager} = this.state;
+		const { manager } = this.state;
 		return {
-			manager
+			analyticsManager: manager
 		};
 	}
 
@@ -32,11 +28,12 @@ export default class Session extends React.Component {
 
 	async componentDidMount () {
 		const {name = 'Main'} = this.props;
-		const service = await getService();
+		const [service, user] = await Promise.all([getService(), getAppUser()]);
 		const storage = LocalStorage;
 
 		if (this.unmounted) {
 			const manager = new Manager(name, storage, service);
+			manager.setUser(user.getID());
 			manager.beginSession();
 
 			this.setState({ manager });
@@ -67,7 +64,7 @@ export default class Session extends React.Component {
 
 
 	endSession = () => {
-		const {manager} = this.state;
+		const { manager } = this.state;
 
 		if (!manager) {
 			return;
