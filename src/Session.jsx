@@ -26,22 +26,10 @@ export default class Session extends React.Component {
 	state = {}
 
 
-	async componentDidMount () {
-		const {name = 'Main'} = this.props;
-		const [service, user] = await Promise.all([getService(), getAppUser()]);
-		const storage = LocalStorage;
-
-		if (this.unmounted) {
-			const manager = new Manager(name, storage, service);
-			manager.setUser(user.getID());
-			manager.beginSession();
-
-			this.setState({ manager });
-		}
-
+	componentDidMount () {
 		window.addEventListener('beforeunload', this.endSession);
-
 		VisibilityMonitor.addChangeListener(this.onVisibilityChanged);
+		this.setup();
 	}
 
 
@@ -51,6 +39,21 @@ export default class Session extends React.Component {
 		this.unmounted = true;
 		this.setState = () => {};
 		this.endSession();
+	}
+
+
+	async setup () {
+		const {name = 'Main'} = this.props;
+		const [service, user] = await Promise.all([getService(), getAppUser()]);
+		const storage = LocalStorage;
+
+		if (!this.unmounted) {
+			const manager = new Manager(name, storage, service);
+			manager.setUser(user.getID());
+			manager.beginSession();
+
+			this.setState({ manager });
+		}
 	}
 
 
