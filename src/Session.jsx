@@ -43,9 +43,12 @@ export default class Session extends React.Component {
 
 
 	async setup () {
+		delete this.ended;
+
 		const {name = 'Main'} = this.props;
 		const [service, user] = await Promise.all([getService(), getAppUser()]);
 		const storage = LocalStorage;
+
 
 		if (!this.unmounted) {
 			const manager = new Manager(name, storage, service);
@@ -69,9 +72,11 @@ export default class Session extends React.Component {
 	endSession = () => {
 		const { manager } = this.state;
 
-		if (!manager) {
+		if (!manager || this.ended) {
 			return;
 		}
+
+		this.ended = true;
 
 		manager.endSession();
 	}
