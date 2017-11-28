@@ -41,7 +41,7 @@ export default class Session extends React.Component {
 
 		window.addEventListener('beforeunload', this.endSession);
 
-		VisibilityMonitor.addChangeListener();
+		VisibilityMonitor.addChangeListener(this.onVisibility);
 	}
 
 
