@@ -41,13 +41,13 @@ export default class Session extends React.Component {
 
 		window.addEventListener('beforeunload', this.endSession);
 
-		VisibilityMonitor.addChangeListener(this.onVisibility);
+		VisibilityMonitor.addChangeListener(this.onVisibilityChanged);
 	}
 
 
 	componentWillUnmount () {
 		window.removeEventListener('beforeunload', this.endSession);
-		VisibilityMonitor.removeChangeListener(this.onVisibility);
+		VisibilityMonitor.removeChangeListener(this.onVisibilityChanged);
 		this.unmounted = true;
 		this.setState = () => {};
 		this.endSession();
