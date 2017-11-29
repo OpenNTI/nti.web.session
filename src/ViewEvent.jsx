@@ -7,7 +7,22 @@ export default class ViewEvent extends React.Component {
 		type: PropTypes.string.isRequired,
 		resourceId: PropTypes.string.isRequired,
 
-		context: PropTypes.any, //Array, or Promise that fulfills with Array
+		/**
+		 *  Array, or Promise that fulfills with the same array type.
+		 *
+		 * @type {string[]|Object[]|Promise<string[]|Object[]>}
+		 */
+		context: PropTypes.oneOf([
+			PropTypes.instanceOf(Promise),
+			PropTypes.arrayOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.shape({
+						ntiid: PropTypes.string
+					})
+				])
+			),
+		]),
 		rootContextId: PropTypes.string,
 
 		children: PropTypes.any,
@@ -50,8 +65,16 @@ export default class ViewEvent extends React.Component {
 		this.send('start');
 	}
 
-	componentDidUpdate () {
-		this.send('update');
+	componentWillReceiveProps (nextProps) {
+		if (nextProps.resourceId !== this.props.resourceId) {
+			this.send('stop');
+		}
+	}
+
+	componentDidUpdate (prevProps) {
+		const action = prevProps.resourceId !== this.props.resourceId ? 'start' : 'update';
+
+		this.send(action);
 	}
 
 	componentWillUnmount () {
