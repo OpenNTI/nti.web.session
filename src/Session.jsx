@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import {Manager} from 'nti-analytics';
 import {getService, getAppUser} from 'nti-web-client';
 import {LocalStorage} from 'nti-web-storage';
-import {VisibilityMonitor} from 'nti-lib-dom';
+import {InactivityMonitor} from 'nti-lib-dom';
+import Logger from 'nti-util-logger';
+
+
+const logger = Logger.get('analytics:session');
 
 
 export default class Session extends React.Component {
@@ -28,14 +32,21 @@ export default class Session extends React.Component {
 
 	componentDidMount () {
 		window.addEventListener('beforeunload', this.endSession);
-		VisibilityMonitor.addChangeListener(this.onVisibilityChanged);
+
+		const monitor = this.activeStateMonitor = new InactivityMonitor(document.body);
+
+		this.unsubscribe = monitor.addChangeListener(this.onActiveStateChanged);
+
 		this.setup();
 	}
 
 
 	componentWillUnmount () {
 		window.removeEventListener('beforeunload', this.endSession);
-		VisibilityMonitor.removeChangeListener(this.onVisibilityChanged);
+
+		this.unsubscribe();
+		this.unsubscribe = () => {};
+
 		this.unmounted = true;
 		this.setState = () => {};
 		this.endSession();
@@ -44,6 +55,7 @@ export default class Session extends React.Component {
 
 	async setup () {
 		delete this.ended;
+		logger.debug('Setting up Session');
 
 		const {name = 'Main'} = this.props;
 		const [service, user] = await Promise.all([getService(), getAppUser()]);
@@ -51,6 +63,7 @@ export default class Session extends React.Component {
 
 
 		if (!this.unmounted) {
+			logger.debug('Constructing the Analytics Manager');
 			const manager = new Manager(name, storage, service);
 			manager.setUser(user.getID());
 			manager.beginSession();
@@ -60,12 +73,21 @@ export default class Session extends React.Component {
 	}
 
 
-	onVisibilityChanged = (visible) => {
-		// const fn = visible
-		// 	? resumeSession
-		// 	: endSession;
-		//
-		// fn('visiblity changed');
+	onActiveStateChanged = (active) => {
+		logger.debug('Active State changed. (active: %s)', Boolean(active));
+		const { manager } = this.state;
+
+		if (this.ended) {
+			return;
+		}
+
+		if (!active) {
+			manager.suspendEvents();
+			manager.endSession();
+		} else {
+			manager.resumeEvents();
+			manager.beginSession();
+		}
 	}
 
 
