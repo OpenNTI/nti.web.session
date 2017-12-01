@@ -8,7 +8,7 @@ import Logger from 'nti-util-logger';
 
 
 const logger = Logger.get('analytics:session');
-
+const ActiveVideoEvent = e => e && e.video && !e.isFinished();
 
 export default class Session extends React.Component {
 	static propTypes = {
@@ -78,6 +78,16 @@ export default class Session extends React.Component {
 		const { manager } = this.state;
 
 		if (this.ended) {
+			return;
+		}
+
+		Object.assign(this, {active});
+
+		clearTimeout(this.deferredActiveStateChange);
+
+		if (!manager.suspended && manager.findActiveEvent(ActiveVideoEvent)) {
+			logger.debug('There is an unfinished video event in the queue, leaving ActiveState as-is.', Boolean(active));
+			this.deferredActiveStateChange = setTimeout(() => this.onActiveStateChanged(active), 1000);
 			return;
 		}
 
