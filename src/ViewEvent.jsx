@@ -12,7 +12,7 @@ export default class ViewEvent extends React.Component {
 		 *
 		 * @type {string[]|Object[]|Promise<string[]|Object[]>}
 		 */
-		context: PropTypes.oneOf([
+		context: PropTypes.oneOfType([
 			PropTypes.instanceOf(Promise),
 			PropTypes.arrayOf(
 				PropTypes.oneOfType([
