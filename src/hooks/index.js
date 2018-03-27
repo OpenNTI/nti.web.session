@@ -1,1 +1,1 @@
-export AfterBatchEvents from './AfterBatchEvents';
+export afterBatchEvents from './AfterBatchEvents';
