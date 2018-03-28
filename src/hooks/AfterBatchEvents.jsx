@@ -5,7 +5,7 @@ import {Hooks} from 'nti-analytics';
 
 class AfterBatchEvents extends React.Component {
 	static propTypes = {
-		_component: PropTypes.Element
+		_component: PropTypes.element
 	}
 
 
