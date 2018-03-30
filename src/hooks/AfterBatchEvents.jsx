@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {HOC} from 'nti-commons';
 import {Hooks} from 'nti-analytics';
 
