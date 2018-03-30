@@ -5,7 +5,16 @@ import {Hooks} from 'nti-analytics';
 
 class AfterBatchEvents extends React.Component {
 	static propTypes = {
-		_component: PropTypes.element
+		_component: function (props, propName, componentName) {
+			const prop = props[propName];
+			const proto = Object.getPrototypeOf(prop);
+			if (proto !== React.Component && proto !== React.PureComponent) {
+				return new Error(
+					'Invalid prop `' + propName + '` supplied to' +
+					' `' + componentName + '`. Must be a class that extends React.Component.'
+				);
+			}
+		}
 	}
 
 
