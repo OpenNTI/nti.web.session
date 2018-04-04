@@ -77,7 +77,7 @@ export default class Session extends React.Component {
 		logger.debug('Active State changed. (active: %s)', Boolean(active));
 		const { manager } = this.state;
 
-		if (this.ended) {
+		if (this.ended || !manager) {
 			return;
 		}
 
