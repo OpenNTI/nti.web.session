@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Manager} from 'nti-analytics';
-import {getService, getAppUser} from 'nti-web-client';
-import {LocalStorage} from 'nti-web-storage';
-import {InactivityMonitor} from 'nti-lib-dom';
-import Logger from 'nti-util-logger';
+import {Manager} from '@nti/lib-analytics';
+import {getService, getAppUser} from '@nti/web-client';
+import {LocalStorage} from '@nti/web-storage';
+import {InactivityMonitor} from '@nti/lib-dom';
+import Logger from '@nti/util-logger';
 
 
 const logger = Logger.get('analytics:session');

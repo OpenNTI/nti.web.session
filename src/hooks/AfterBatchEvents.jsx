@@ -1,6 +1,6 @@
 import React from 'react';
-import {HOC} from 'nti-commons';
-import {Hooks} from 'nti-analytics';
+import {HOC} from '@nti/lib-commons';
+import {Hooks} from '@nti/lib-analytics';
 
 class AfterBatchEvents extends React.Component {
 	static propTypes = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toAnalyticsPath } from 'nti-analytics';
+import { toAnalyticsPath } from '@nti/lib-analytics';
 
 export default class ViewEvent extends React.Component {
 	static propTypes = {
