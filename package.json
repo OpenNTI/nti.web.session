@@ -22,6 +22,9 @@
     "type": "git",
     "url": "git+https://github.com/NextThought/nti.web.session.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.nextthought.com"
+  },
   "bugs": {
     "url": "https://github.com/NextThought/nti.web.session/issues"
   },
