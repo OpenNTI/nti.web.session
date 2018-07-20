@@ -47,9 +47,9 @@ export default class ViewEvent extends React.Component {
 		return [resourceId, data];
 	}
 
-	async send (trigger) {
+	async send (trigger, props = this.props) {
 		const event = this.getEvent();
-		const args = await this.getEventArgs();
+		const args = await this.getEventArgs(props);
 
 		if (event && !event[trigger] && trigger === 'start') {
 			trigger = 'send';
@@ -65,14 +65,13 @@ export default class ViewEvent extends React.Component {
 		this.send('start');
 	}
 
-	componentWillReceiveProps (nextProps) {
-		if (nextProps.resourceId !== this.props.resourceId) {
-			this.send('stop');
-		}
-	}
-
 	componentDidUpdate (prevProps) {
-		const action = prevProps.resourceId !== this.props.resourceId ? 'start' : 'update';
+		let action = 'update';
+
+		if (prevProps.resourceId !== this.props.resourceId) {
+			action = 'start';
+			this.send('stop', prevProps);
+		}
 
 		this.send(action);
 	}
