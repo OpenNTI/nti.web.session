@@ -57,18 +57,23 @@ export default class Session extends React.Component {
 		delete this.ended;
 		logger.debug('Setting up Session');
 
-		const {name = 'Main'} = this.props;
-		const [service, user] = await Promise.all([getService(), getAppUser()]);
-		const storage = LocalStorage;
+		try {
+
+			const {name = 'Main'} = this.props;
+			const [service, user] = await Promise.all([getService(), getAppUser()]);
+			const storage = LocalStorage;
 
 
-		if (!this.unmounted) {
-			logger.debug('Constructing the Analytics Manager');
-			const manager = new Manager(name, storage, service);
-			manager.setUser(user.getID());
-			manager.beginSession();
+			if (!this.unmounted) {
+				logger.debug('Constructing the Analytics Manager');
+				const manager = new Manager(name, storage, service);
+				manager.setUser(user.getID());
+				manager.beginSession();
 
-			this.setState({ manager });
+				this.setState({ manager });
+			}
+		} catch (e) {
+			logger.debug('Not Logged in. Skipping.');
 		}
 	}
 
