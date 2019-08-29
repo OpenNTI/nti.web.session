@@ -41,6 +41,7 @@ export default class ViewEvent extends React.Component {
 		delete data.children;
 
 		if (data.context) {
+			// eslint-disable-next-line require-atomic-updates
 			data.context = toAnalyticsPath(await Promise.resolve(data.context), resourceId);
 		}
 
