@@ -10,6 +10,14 @@ export const TOPIC_COMMENT_CREATED = 'topic-comment-created';
 export const TOPIC_COMMENT_UPDATED = 'topic-comment-updated';
 export const TOPIC_COMMENT_DELETED = 'topic-comment-deleted';
 
+export const BLOG_ENTRY_CREATED = 'blog-entry-created';
+export const BLOG_ENTRY_UPDATED = 'blog-entry-created';
+export const BLOG_ENTRY_DELETED = 'blog-entry-deleted';
+
+export const BLOG_COMMENT_CREATED = 'blog-comment-created';
+export const BLOG_COMMENT_UPDATED = 'blog-comment-updated';
+export const BLOG_COMMENT_DELETED = 'blog-comment-deleted';
+
 export const ASSIGNMENT_SUBMITTED = 'assignment-submitted';
 
 export const ASSESSMENT_SUBMITTED = 'assessment-submitted';
