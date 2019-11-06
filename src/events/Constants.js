@@ -21,3 +21,5 @@ export const BLOG_COMMENT_DELETED = 'blog-comment-deleted';
 export const ASSIGNMENT_SUBMITTED = 'assignment-submitted';
 
 export const ASSESSMENT_SUBMITTED = 'assessment-submitted';
+
+export const THEME_UPDATED = 'theme-updated';
