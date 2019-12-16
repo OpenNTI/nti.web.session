@@ -18,6 +18,10 @@ export const BLOG_COMMENT_CREATED = 'blog-comment-created';
 export const BLOG_COMMENT_UPDATED = 'blog-comment-updated';
 export const BLOG_COMMENT_DELETED = 'blog-comment-deleted';
 
+export const EVENT_CREATED = 'event-created';
+export const EVENT_UPDATED = 'event-updated';
+export const EVENT_DELETED = 'event-deleted';
+
 export const ASSIGNMENT_SUBMITTED = 'assignment-submitted';
 
 export const ASSESSMENT_SUBMITTED = 'assessment-submitted';
