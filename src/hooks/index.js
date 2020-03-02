@@ -1,2 +1,2 @@
-export afterBatchEvents from './AfterBatchEvents';
-export onEvent from './OnEvent';
+export { default as afterBatchEvents } from './AfterBatchEvents';
+export { default as onEvent } from './OnEvent';
