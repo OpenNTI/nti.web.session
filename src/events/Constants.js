@@ -22,6 +22,9 @@ export const EVENT_CREATED = 'event-created';
 export const EVENT_UPDATED = 'event-updated';
 export const EVENT_DELETED = 'event-deleted';
 
+export const ITEM_PINNED = 'item-pinned';
+export const ITEM_UNPINNED = 'item-unpinned';
+
 export const ASSIGNMENT_SUBMITTED = 'assignment-submitted';
 
 export const ASSESSMENT_SUBMITTED = 'assessment-submitted';
