@@ -50,6 +50,12 @@ class AfterBatchEvents extends React.Component {
 }
 
 
+afterBatchEvents.subscribe = (fn) => {
+	Hooks.addAfterBatchEventsListener(fn);
+
+	return () => Hooks.removeAfterBatchEventsListener(fn);
+};
+
 export default function afterBatchEvents () {
 	return function decorator (cmp) {
 		class AfterBatchEventsComposer extends React.Component {
