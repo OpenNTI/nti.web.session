@@ -1,6 +1,6 @@
 {
   "name": "@nti/web-session",
-  "version": "1.16.0",
+  "version": "1.17.0-alpha",
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Provides web analytic session interactions",
