@@ -43,6 +43,6 @@
     "@nti/cmp-scripts": "^2.0.0",
     "@nti/style-common": "NextThought/nti.style.common",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react-dom": "^17.0.1"
   }
 }
