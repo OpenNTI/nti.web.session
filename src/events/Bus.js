@@ -1,3 +1,5 @@
 import EventEmitter from 'events';
 
-export default new EventEmitter ();
+const Bus = new EventEmitter ();
+Bus.setMaxListeners(0);
+export default Bus;
