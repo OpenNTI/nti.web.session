@@ -36,13 +36,16 @@
     "@nti/lib-dom": "NextThought/nti.lib.dom",
     "@nti/util-logger": "NextThought/nti.util.logger",
     "@nti/web-client": "NextThought/nti.web.client",
-    "@nti/web-storage": "NextThought/nti.web.storage",
-    "prop-types": "^15.6.0"
+    "@nti/web-storage": "NextThought/nti.web.storage"
   },
   "devDependencies": {
     "@nti/cmp-scripts": "^2.0.0",
-    "@nti/style-common": "NextThought/nti.style.common",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "@nti/style-common": "NextThought/nti.style.common"
+  },
+  "peerDependencies": {
+    "classnames": "*",
+    "react": "*",
+    "react-dom": "*",
+    "prop-types": "*"
   }
 }
