@@ -39,13 +39,6 @@
     "@nti/web-storage": "NextThought/nti.web.storage"
   },
   "devDependencies": {
-    "@nti/cmp-scripts": "^2.0.0",
-    "@nti/style-common": "NextThought/nti.style.common"
-  },
-  "peerDependencies": {
-    "classnames": "*",
-    "react": "*",
-    "react-dom": "*",
-    "prop-types": "*"
+    "@nti/cmp-scripts": "^2.31.8"
   }
 }
