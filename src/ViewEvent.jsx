@@ -37,12 +37,12 @@ export default class ViewEvent extends React.Component {
 		return manager && manager[type];
 	}
 
-	async getEventArgs ({resourceId, ...data} = this.props) {
+	async getEventArgs ({resourceId, ...rest} = this.props) {
+		const data = {...rest};
 		delete data.children;
 
-		if (data.context) {
-			// eslint-disable-next-line require-atomic-updates
-			data.context = toAnalyticsPath(await Promise.resolve(data.context), resourceId);
+		if (rest.context) {
+			data.context = toAnalyticsPath(await Promise.resolve(rest.context), resourceId);
 		}
 
 		return [resourceId, data];
