@@ -18,37 +18,40 @@ export default class ViewEvent extends React.Component {
 				PropTypes.oneOfType([
 					PropTypes.string,
 					PropTypes.shape({
-						ntiid: PropTypes.string
-					})
+						ntiid: PropTypes.string,
+					}),
 				])
 			),
 		]),
 		rootContextId: PropTypes.string,
 
 		children: PropTypes.any,
-	}
+	};
 
 	static contextTypes = {
-		analyticsManager: PropTypes.object.isRequired
-	}
+		analyticsManager: PropTypes.object.isRequired,
+	};
 
-	getEvent ({type} = this.props) {
-		const {analyticsManager: manager} = this.context;
+	getEvent({ type } = this.props) {
+		const { analyticsManager: manager } = this.context;
 		return manager && manager[type];
 	}
 
-	async getEventArgs ({resourceId, ...rest} = this.props) {
-		const data = {...rest};
+	async getEventArgs({ resourceId, ...rest } = this.props) {
+		const data = { ...rest };
 		delete data.children;
 
 		if (rest.context) {
-			data.context = toAnalyticsPath(await Promise.resolve(rest.context), resourceId);
+			data.context = toAnalyticsPath(
+				await Promise.resolve(rest.context),
+				resourceId
+			);
 		}
 
 		return [resourceId, data];
 	}
 
-	async send (trigger, props = this.props) {
+	async send(trigger, props = this.props) {
 		const event = this.getEvent();
 		const args = await this.getEventArgs(props);
 
@@ -61,12 +64,11 @@ export default class ViewEvent extends React.Component {
 		}
 	}
 
-
-	componentDidMount () {
+	componentDidMount() {
 		this.send('start');
 	}
 
-	componentDidUpdate (prevProps) {
+	componentDidUpdate(prevProps) {
 		let action = 'update';
 
 		if (prevProps.resourceId !== this.props.resourceId) {
@@ -77,11 +79,11 @@ export default class ViewEvent extends React.Component {
 		this.send(action);
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		this.send('stop');
 	}
 
-	render () {
+	render() {
 		return this.props.children || null;
 	}
 }

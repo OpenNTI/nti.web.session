@@ -1,6 +1,6 @@
 import React from 'react';
-import {HOC} from '@nti/lib-commons';
-import {Hooks} from '@nti/lib-analytics';
+import { HOC } from '@nti/lib-commons';
+import { Hooks } from '@nti/lib-analytics';
 
 class AfterBatchEvents extends React.Component {
 	static propTypes = {
@@ -9,66 +9,58 @@ class AfterBatchEvents extends React.Component {
 			const proto = Object.getPrototypeOf(prop);
 			if (proto !== React.Component && proto !== React.PureComponent) {
 				return new Error(
-					'Invalid prop `' + propName + '` supplied to' +
-					' `' + componentName + '`. Must be a class that extends React.Component.'
+					'Invalid prop `' +
+						propName +
+						'` supplied to' +
+						' `' +
+						componentName +
+						'`. Must be a class that extends React.Component.'
 				);
 			}
-		}
-	}
+		},
+	};
 
+	attachRef = x => (this.ref = x);
 
-	attachRef = x => this.ref = x
-
-
-	componentDidMount () {
+	componentDidMount() {
 		Hooks.addAfterBatchEventsListener(this.afterBatchEvents);
 	}
 
-
-	componentWillUnmount () {
+	componentWillUnmount() {
 		Hooks.removeAfterBatchEventsListener(this.afterBatchEvents);
 	}
 
-
-	afterBatchEvents = (data) => {
+	afterBatchEvents = data => {
 		if (this.ref && this.ref.afterBatchEvents) {
 			this.ref.afterBatchEvents(data);
 		}
-	}
+	};
 
+	render() {
+		const { _component: Cmp, ...otherProps } = this.props;
 
-	render () {
-		const {_component:Cmp, ...otherProps} = this.props;
-
-		return (
-			<Cmp
-				{...otherProps}
-				ref={this.attachRef}
-			/>
-		);
+		return <Cmp {...otherProps} ref={this.attachRef} />;
 	}
 }
 
-
-afterBatchEvents.subscribe = (fn) => {
+afterBatchEvents.subscribe = fn => {
 	Hooks.addAfterBatchEventsListener(fn);
 
 	return () => Hooks.removeAfterBatchEventsListener(fn);
 };
 
-export default function afterBatchEvents () {
-	return function decorator (cmp) {
+export default function afterBatchEvents() {
+	return function decorator(cmp) {
 		class AfterBatchEventsComposer extends React.Component {
-			render () {
-				return (
-					<AfterBatchEvents
-						{...this.props}
-						_component={cmp}
-					/>
-				);
+			render() {
+				return <AfterBatchEvents {...this.props} _component={cmp} />;
 			}
 		}
 
-		return HOC.hoistStatics(AfterBatchEventsComposer, cmp, 'AfterBatchEvents');
+		return HOC.hoistStatics(
+			AfterBatchEventsComposer,
+			cmp,
+			'AfterBatchEvents'
+		);
 	};
 }
