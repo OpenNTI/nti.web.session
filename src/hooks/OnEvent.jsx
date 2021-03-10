@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { HOC, PropTypes as prop } from '@nti/lib-commons';
 
 import { addListener, removeListener } from '../events';

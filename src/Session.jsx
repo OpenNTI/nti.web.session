@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Manager } from '@nti/lib-analytics';
 import { getService, getAppUser } from '@nti/web-client';
 import { LocalStorage } from '@nti/web-storage';
