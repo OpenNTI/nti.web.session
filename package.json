@@ -9,7 +9,7 @@
   "module": "src/index.js",
   "scripts": {
     "test": "cmp-scripts test",
-    "start": "cmp-scripts start",
+    "start": "start-storybook -p 6006",
     "clean": "cmp-scripts clean",
     "check": "cmp-scripts check",
     "release": "cmp-scripts release",
