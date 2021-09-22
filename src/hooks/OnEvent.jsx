@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { HOC, PropTypes as prop } from '@nti/lib-commons';
+import { HOC } from '@nti/lib-commons';
 
 import { addListener, removeListener } from '../events';
 
 class OnEvent extends React.Component {
 	static propTypes = {
-		_component: prop.component,
+		_component: PropTypes.elementType,
 		_events: PropTypes.object,
 	};
 
